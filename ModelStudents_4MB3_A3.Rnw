@@ -1,0 +1,228 @@
+\documentclass[12pt]{article}
+
+\input  4mbapreamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FANCY HEADER AND FOOTER STUFF %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{}% clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt}% Removes funny header line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+{\bf Mathematics 4MB3/6MB3 Mathematical Biology\\
+\smallskip
+2017 ASSIGNMENT 3}\\
+\medskip
+\underline{\emph{Group Name}}: \texttt{{\color{blue}Model Students}}\\
+\medskip
+\underline{\emph{Group Members}}: {\color{blue}Nicole Dumont, Melody Fong, Connor LeDrew, Carolina Weishaar}
+\end{center}
+
+\bigskip
+\noindent
+This assignment was {\bfseries\color{black} due in class} on \textcolor{black}{\bf Wednesday 1 March 2017 at 11:30am}.
+
+\section*{Analysis of the standard SIR model with vital dynamics}
+
+Consider the standard SIR model with vital dynamics,
+\begin{subequations}\label{E:SIR}
+\begin{align}
+ \frac{dS}{dt} &= \mu N - \beta SI - \mu S\\
+  \noalign{\vspace{8pt}}
+  \frac{dI}{dt} &= \beta SI - \gamma I - \mu I\\
+  \noalign{\vspace{8pt}}
+  \frac{dR}{dt} &= \gamma I - \mu R
+\end{align}
+\end{subequations}
+where $S$, $I$ and $R$ denote the numbers of susceptible, infectious
+and removed individuals, respectively, and $N=S+I+R$ is the total
+population size. The \emph{per capita} rates of birth and death are
+the same (both are equal to $\mu$). As usual, $\beta$ is the
+transmission rate and $\gamma$ is the recovery rate.
+
+\begin{enumerate}[(a)]
+
+\item Prove that the population size $N$ is constant and that
+  equations \eqref{E:SIR} are biologically well-defined, \ie the set
+  $\Delta$ of biologically meaningful states is forward-invariant.
+  (Note that you will need to begin by defining precisely the set
+  $\Delta$ and the term ``forward-invariant''.)
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Show that equations \eqref{E:SIR} are equivalent dynamically to
+ equations for the proportions (rather than numbers) of individuals
+  in each disease state. For the remainder of this problem, use the
+  equations in proportional form.
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Re-express the equations for proportions in \emph{dimensionless}
+  form using the dimensionless time coordinate
+  \begin{subequations}\label{E:dimparms}
+    \begin{equation}
+      \tau=(\gamma+\mu)t\,,
+    \end{equation}
+  and the dimensionless parameters
+  \begin{align}
+    \R_0 &= \frac{\beta}{\gamma+\mu} \,,\\
+    \noalign{\vspace{5pt}}
+    \eps &= \frac {\mu}{\gamma+\mu} \,.
+  \end{align}
+\end{subequations}
+What are the biological meanings of $\tau$, $\R_0$ and $\eps$? Why are
+they good choices for non-dimensionalizing the equations? For a few
+diseases that you are familiar with, what is the order of magnitude of
+$\eps$?
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Show that there are exactly two equilibria: the disease free
+  equilibrium (DFE) at $(S,I)=(1,0)$ and an endemic equilibrium (EE)
+  at $(S,I)=(\Shat,\Ihat)$, where $\Shat$ and $\Ihat$ can be expressed
+  compactly in terms of $\R_0$ and $\eps$.  Are both equilibria always
+  biologically relevant?
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Show that the DFE is locally asymptotically stable (LAS) if
+  $\R_0<1$ and the EE is LAS if $\R_0>1$.
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Prove that the DFE is, in fact, globally asymptotically stable (GAS) if $\R_0\le1$.  \emph{\underline{Hint}:} This requires some careful analysis.  Begin by using the function $L(S,I)=I$, and Theorem~2 stated in Assignment 1 under ``Notes on Lyapunov Functions'', to prove that all initial states in $\Delta$ are attracted to the $S$ axis.
+  \label{DFEGASprob}
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Prove that the EE is GAS if $\R_0>1$. \quad\emph{\underline{Hint}:} Consider
+\begin{equation}\label{E:LyapFun}
+L(S,I) = S - \Shat\log{S} + I - \Ihat\log{I} \,,
+\end{equation}
+and convince yourself that condition (a) in Theorem~1 stated in Assignment 1 under ``Notes on Lyapunov Functions'' can be replaced with
+\begin{equation}\label{E:}
+L(X)>L(X_*) \quad \text{for all} \quad X\in\openset\setminus\{X_*\} \,.
+\end{equation}
+\emph{\underline{Note}:} By GAS we mean here that \emph{almost all} initial states are attracted to the EE.  One way of making this precise is to say that the \emph{basin of attraction} of the EE is an open, dense subset of $\Delta$.  You should completely describe the basins of attraction of both the EE and the DFE.  Do your results make biological sense?
+  \label{EEGASprob}
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Prove that the approach to the EE occurs via damped oscillations
+  if and only if $\eps<\eps^*$, where
+\begin{equation}\label{E:Gstar}
+\eps^* = \frac {4(\R_0-1)}{\R_0^2} \,.
+\end{equation}
+For which diseases that you are familiar with would you expect damped
+oscillations versus monotonic convergence to the equilibrium?
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item For $\eps<\eps^*$, derive expressions for the period of damped
+  oscillations onto the EE and the $e$-folding time for decay of the
+  amplitude of oscillation.  Use \Rlogo to make a plot that
+  displays your results graphically for some biologically relevant and
+  illustrative parameter values.
+
+{\color{blue}
+\begin{proof}[Solution]
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots\ And here's a sample inclusion of a graph in this \texttt{knitr} script\dots\ not the right graph, but hey, this is just a template\dots}
+<<niceplot,fig.height=4>>=
+x <- seq(0,2*pi,length=100)
+plot(x,sin(x),col="red",type="l",lwd=5)
+@ 
+\end{proof}
+}
+
+\item Prove that as $\R_0$ is increased from $0$ to $\infty$, three
+  ``bifurcations'' occur.  In addition, use \Rlogo to make a
+  four-panel plot that illustrates the different dynamics (phase
+  portraits) in each of the four $\R_0$ intervals that have distinct
+  dynamics. (\emph{\underline{Hint}:} I suggest you choose $\eps=8/9$ for this
+  figure, but you should explain why this is a good choice.)
+
+  \smallskip
+
+  Note that ``bifurcation'' is in quotes above because many dynamicists
+  would consider only one of the three transitions to be a genuine
+  bifurcation (it happens to be a \emph{transcritical bifurcation}).
+  The other two dynamical transitions yield biologically relevant
+  qualitative changes, but the phase portraits on either side of the
+  ``bifurcation point'' are actually topologically conjugate.
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\item Are there real diseases that display recurrent epidemics for which
+  the standard SIR model that you have studied in this problem might be
+  adequate to explain the observed epidemic dynamics?  If so, which
+  diseases?  If not, why not?
+
+{\color{blue}
+\begin{proof}
+{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+\end{proof}
+}
+
+\end{enumerate}
+
+%%\newpage
+\bibliographystyle{vancouver}
+%%\bibliography{DavidEarn,MyPubs}
+
+\bigskip\vfill
+
+\centerline{\bf--- END OF ASSIGNMENT ---}
+
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
+
+\end{document}
