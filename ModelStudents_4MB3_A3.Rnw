@@ -39,9 +39,9 @@ This assignment was {\bfseries\color{black} due in class} on \textcolor{black}{\
 Consider the standard SIR model with vital dynamics,
 \begin{subequations}\label{E:SIR}
 \begin{align}
- \frac{dS}{dt} &= \mu N - \beta SI - \mu S\\
+ \frac{dS}{dt} &= \mu N - \frac{\beta}{N} SI - \mu S\\
   \noalign{\vspace{8pt}}
-  \frac{dI}{dt} &= \beta SI - \gamma I - \mu I\\
+  \frac{dI}{dt} &= \frac{\beta}{N} SI - \gamma I - \mu I\\
   \noalign{\vspace{8pt}}
   \frac{dR}{dt} &= \gamma I - \mu R
 \end{align}
