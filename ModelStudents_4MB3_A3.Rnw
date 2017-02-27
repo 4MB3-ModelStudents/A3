@@ -1,9 +1,10 @@
 \documentclass[12pt]{article}
 
 \input  4mbapreamble
+\usepackage{cases}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% FANCY HEADER AND FOOTER STUFF %%
+%% FANCY HEADER AND FOOTER STUFF%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr,lastpage}
 \pagestyle{fancy}
@@ -62,7 +63,17 @@ transmission rate and $\gamma$ is the recovery rate.
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+\begin{align}
+N &= S + I + R \\
+\frac{dN}{dt} &= \frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} \\
+&= \mu N - \frac{\beta}{N} SI - \mu S + \frac{\beta}{N} - \gamma I - \mu I + \gamma I - \mu R \\
+&= \mu (N - S - I - R) \\
+&= 0
+\end{align}
+$\therefore$ N is constant $\forall$ t. \\
+Forward Invarianace: A solution that tends to one equilibria $x_*$ in forward time. (i.e. $\forall x(t)\in\Delta\subseteq S$, $\lim_{t \to \infty} x(t) = x_* $ for $x_*\in\Delta$)  
+}
 \end{proof}
 }
 
@@ -73,7 +84,20 @@ transmission rate and $\gamma$ is the recovery rate.
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+
+\begin{subnumcases} {F(t) = \label{E:SIR/N}} 
+\frac{d}{dt}\frac{S}{N} = \frac{d\tilde{S}}{dt} &= $\mu\frac{N}{N} - \beta\frac{SI}{N^2} - \mu\frac{S}{N}$ \label{E:SIR/N a} \\
+&= $\mu\tilde{N} - \beta\tilde{S}\tilde{I} - \mu\tilde{S}$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d}{dt}\frac{I}{N} = \frac{d\tilde{I}}{dt} &= $\beta \frac{SI}{N^2} - \gamma\frac{I}{N} - \mu\frac{I}{N}$ \label{E:SIR/N b} \\
+&= $\beta\tilde{S}\tilde{I} - \gamma\tilde{I} - \mu\tilde{I}$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d}{dt}\frac{R}{N} = \frac{d\tilde{R}}{dt} &= $\gamma \frac{I}{N} - \mu\frac{R}{N}$ \label{E:SIR/N c} \\
+&= $\gamma\tilde{I} - \mu\tilde{R}$ \nonumber
+\end{subnumcases} 
+$\therefore$ the equations for the proportions \ref{E:SIR/N} (denoted by $\sim$) are dynamically equivalent to \eqref{E:SIR}.
+}
 \end{proof}
 }
 
@@ -97,7 +121,42 @@ $\eps$?
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+\emph{Note:} $\frac{d\tau}{dt}=(\gamma + \mu)$ \\
+\noindent
+\begin{minipage}[b]{0.75\textwidth}
+\begin{flushleft}
+\begin{subnumcases}{F(\tau) =}
+\frac{d\tilde{S}}{dt}\frac{d\tau}{dt} = \frac{d\tilde{S}}{d\tau} &= $(\mu\tilde{N} - \beta\tilde{S} \tilde{I} - \mu\tilde{S})(\frac{1}{\gamma + \mu})$ \label{E:dimlessSIR/N a}\\
+&= $\epsilon\tilde{N} - \R_0\tilde{S}\tilde{I} - \epsilon\tilde{S}$ \nonumber \\
+&= $\epsilon(\tilde{N}-\tilde{S}) - \R_0\tilde{S}\tilde{I}$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d\tilde{I}}{dt}\frac{d\tau}{dt} = \frac{d\tilde{I}}{d\tau} &= $(\beta\tilde{S}\tilde{I} - \gamma\tilde{I} - \mu\tilde{I})(\frac{1}{\gamma + \mu})$ \label{dimlessSIR/N b}\\
+&= $\R_0\tilde{S}\tilde{I} - \tilde{I}(\frac{\gamma + \mu}{\gamma + \mu})$ \nonumber \\
+&= $\R_0\tilde{S}\tilde{I} - \tilde{I}$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d\tilde{R}}{dt}\frac{d\tau}{dt} = \frac{d\tilde{R}}{d\tau} &= $(\gamma\tilde{I} - \mu\tilde{R})(\frac{1}{\gamma + \mu})$ \label{E:dimlessSIR/N c}\\
+&= $(\gamma\tilde{I} - \mu(\tilde{N} - \tilde{S} - \tilde{I}))(\frac{1}{\gamma + \mu})$ \nonumber \\
+&= $(\tilde{I}(\gamma + \mu) - \mu\tilde{N} + \mu\tilde{S})(\frac{1}{\gamma + \mu})$ \nonumber \\
+&= $\tilde{I} - \epsilon\tilde{N} + \epsilon\tilde{S}$ \nonumber \\
+&= $\tilde{I} - \epsilon(\tilde{N} - \tilde{S})$ \nonumber 
+\end{subnumcases}
+\end{flushleft}
+\end{minipage}
+\fbox{
+\begin{minipage}{0.2\textwidth} 
+\emph{Note:}
+\begin{align*}
+\tilde{N} &= \tilde{S} + \tilde{I} + \tilde{R} \\
+&= \frac{S + I + R}{N} \\
+&= \frac{N}{N} = 1
+\end{align*}
+\end{minipage}
+}
+$\tau$ is the number of individuals leaving the system due to recovery or death. \\
+$\R_0$ is the basic reproduction number, the number of new transmissions per infected individual. \\
+$\epsilon$ is the number of new individuals entering the system per infected individual leaving.
+}
 \end{proof}
 }
 
@@ -109,7 +168,33 @@ $\eps$?
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+Notice that $\frac{d\tilde{R}}{d\tau}$ is a linear combination of $\tilde{S}$ and $\tilde{I}$, independent of $\tilde{R}$, so $F(\tau) = F(\tilde{S}(\tau),\tilde{I}(\tau))$. \\
+
+For the DFE,
+\begin{subnumcases}{F(1,0) = \label{E:DFE}}
+\frac{d\tilde{S}}{d\tau} &= $\epsilon(\tilde{N} - \tilde{S}) - \R_0\tilde{S}\tilde{I}$ \label{E:DFE a} \\
+&= 0 \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d\tilde{I}}{d\tau} &= $\R_0\tilde{S}\tilde{I} - \tilde{I}$ \label{E:DFE b} \\
+&= 0 \nonumber 
+\end{subnumcases}
+thus proving that $(\tilde{S},\tilde{I}) = (1,0)$ is an equilibrium state for the system. \\
+
+\begin{subnumcases}{F(\Shat,\Ihat) = \label{E:EE}}
+\frac{d\tilde{S}}{d\tau} &= $\epsilon(\tilde{N} - \tilde{S}) - \R_0\tilde{S}\tilde{I} = 0$ \label{E:EE a} \\
+\epsilon(\tilde{N} - \tilde{S}) &= $\R_0\tilde{S}\tilde{I}$ \nonumber \\
+\Ihat &= $\frac{\epsilon(1 - \Shat)}{\R_0\Shat}$ \nonumber \\
+&= $\epsilon(1 - \frac{1}{\R_0})$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d\tilde{I}}{d\tau} &= $\R_0\tilde{S}\tilde{I} - \tilde{I} = 0$ \label{E:EE b} \\
+\tilde{I} &= $\R_0\tilde{S}\tilde{I}$ \nonumber \\
+\Shat &= $\frac{1}{R_0}$ \nonumber
+\end{subnumcases}
+Whereas for the EE, when $(\tilde{S},\tilde{I}) = (\Shat,\Ihat) = (\frac{1}{\R_0},\epsilon(1 - \frac{1}{\R_0}))$, this is an equilibrium state for the system. \\
+
+The DFE is always biologically relevant as the proportions for susceptibles and infecteds ($\tilde{S}$ and $\tilde{I}$) at the equilibrium (1,0) is strictly bound within [0,1] for all time. The EE is only biologically relevant when $\R_0>1$ and $0\leq\epsilon\leq\frac{\R_0}{\R_0-1}$, bounding both $\Shat=\frac{1}{\R_0}$ and $\Ihat=\epsilon(1-\frac{1}{\R_0})$ between [0,1] for all time.
+}
 \end{proof}
 }
 
@@ -118,7 +203,39 @@ $\eps$?
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+\[
+DF(\tilde{S}(\tau),\tilde{I}(\tau)) =
+\begin{pmatrix}
+-(\epsilon + \R_0\tilde{I}) & -\R_0\tilde{S} \\
+\R_0\tilde{I} & (\R_0\tilde{S} - 1)
+\end{pmatrix}
+\]
+
+For the DFE, DF(1,0)$\neq$0 so this system is hyperbolic and linearization can be applied.
+\[
+DF(1,0) =
+\begin{pmatrix}
+-\epsilon & -\R_0 \\
+0 & (\R_0 - 1)
+\end{pmatrix}
+\]
+$\therefore$ $det(DF(1,0))=\epsilon(1-\R_0)<0$ iff $\R_0>1$.
+
+By calculating eigenvalues, $det(\lambda-DF(1,0))=(\lambda+\epsilon)(\lambda-(\R_0-1))=0$, so $\lambda_1 = -\epsilon$ and $\lambda_2 = (\R_0-1)$. When $\lambda_1\leq\lambda_2<0$, the equilibrium is locally asymptotically stable. So, the DFE is LAS whenever $\R_0<1$. 
+
+For the EE, $DF(\Shat,\Ihat)\neq$0 so,
+\[
+DF(\frac{1}{\R_0},\epsilon(1 - \frac{1}{\R_0})) =
+\begin{pmatrix}
+-\epsilon\R_0 & -1 \\
+\epsilon(\R_0 - 1) & 0
+\end{pmatrix}
+\]
+$\therefore$ $det(DF(\Shat,\Ihat))=\epsilon(\R_0-1)<0$ iff $\R_0<1$.
+
+By calculating eigenvalues, det($\lambda$-DF($\hat{S}$,$\hat{I}$))=$\lambda(\lambda+\epsilon\R_0)+\epsilon(\R_0-1)=0$ so $\lambda$ = $\pm\sqrt{\epsilon[\frac{\epsilon\R_0^2}{4}-\R_0+1]} - \frac{\epsilon\R_0}{2}$.
+}
 \end{proof}
 }
 
@@ -144,7 +261,9 @@ L(X)>L(X_*) \quad \text{for all} \quad X\in\openset\setminus\{X_*\} \,.
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+
+}
 \end{proof}
 }
 
