@@ -73,7 +73,27 @@ N &= S + I + R \\
 &= 0
 \end{align}
 $\therefore$ N is constant $\forall$ t. \\
-Forward Invarianace: A solution that tends to one equilibria $x_*$ in forward time. (i.e. $\forall x(t)\in\Delta\subseteq S$, $\lim_{t \to \infty} x(t) = x_* $ for $x_*\in\Delta$)  
+The set of biologically meaningful states is
+\begin{equation}
+  \Delta = \{ (S,I,R) : 0 \leq S,I,R \leq N\}.
+\end{equation}
+A set $S$ is forward invariant if $x(t_0) \in S \Rightarrow x(t) \in S \quad \forall t>0$. Consider the behaviour of $(S,I,R)$ at $0$ and $N$:
+\begin{align}
+  S &= 0 \rightarrow \dot{S}=\mu N \geq 0   \nonumber \\
+  & \quad \Rightarrow S(0) \geq 0 \rightarrow S(t) \geq 0 \quad \forall t>0 \\
+  I &= 0 \rightarrow \dot{I}= 0  \nonumber \\
+  & \quad \Rightarrow I(0) \geq 0 \rightarrow I(t) \geq 0 \quad \forall t>0 \\
+  R &= 0 \rightarrow \dot{R}=\gamma I \geq 0  \nonumber \\
+  & \quad \Rightarrow R(0) \geq 0 \rightarrow R(t) \geq 0 \quad \forall t>0 \\
+  S &= N \rightarrow \dot{S}=-\beta I = 0  \nonumber \\
+  & \quad \Rightarrow S(0) \leq N \rightarrow S(t) \leq N \quad \forall t>0 \\
+  I &= N \rightarrow \dot{I}=-(\gamma + \mu) N \leq 0  \nonumber \\
+  & \quad \Rightarrow I(0) \leq N \rightarrow I(t) \leq N \quad \forall t>0 \\
+  R &= N \rightarrow \dot{R}=-\mu N \leq 0  \nonumber \\
+  & \quad \Rightarrow R(0) \leq N \rightarrow R(t) \leq N \quad \forall t>0 
+\end{align}
+Thus, $(S(0), I(0), R(0)) \in \Delta \Rightarrow (S(t), I(t), R(t)) \in \Delta \quad \forall t>0$ and $\Delta$ is a forward invariant set.
+
 }
 \end{proof}
 }
@@ -222,7 +242,7 @@ It's eigenvalues can be found by solving its characteristic polynomial.
 \det(J- \lambda I)  = \lambda^2 + (1+\epsilon +\R_0 I^* - \R_0 S^*)\lambda + \epsilon - \epsilon \R_0 S^* + \R_0 I^* = 0
 \end{equation}
 
-The equilibrium $(S^*, I^*)$ is asymptotically stable if all of the eigenvalues of the linearized system at $(S^*, I^*)$ have negative real parts. REFERENCE GOES HERE
+The equilibrium $(S^*, I^*)$ is asymptotically stable if all of the eigenvalues of the linearized system at $(S^*, I^*)$ have negative real parts. 
 
 For the DFE $(S^*, I^*)=(1,0)$ and the characteristic polynomial is
 \begin{align}
@@ -259,7 +279,7 @@ Consider the function $L:\Delta \rightarrow \R$ defined as $L(S,I)=I$. Let $\mat
   L(S,I) &= I>0 \quad \forall (S,I) \in \Delta \setminus \mathcal{C} \\
   \dot{L}(S,I) &= \underbrace{(\R_0 S - 1)}_{<0 \ if \ \R_0 \leq 1}\underbrace{I}_{>0} <0 \quad \forall (S,I) \in \Delta \setminus \mathcal{C}
 \end{align}
-Thus, L is a strict Lyapunov function and $\mathcal{C}$ is globally asymptotically stable if $\R_0 \leq 1$. All initial states in $\mathcal{B} \equiv \Delta \setminus \{(S,I): S = \frac{1}{\R_0}  \}$ (an open) are attracted to the DFE when $\R_0 \leq 1$. $\mathcal{B}$ is the basin of attraction of the DFE. It is an open, dense suset of $\Delta$. 
+Thus, L is a strict Lyapunov function and $\mathcal{C}$ is globally asymptotically stable if $\R_0 \leq 1$. All initial states in $\mathcal{B} \equiv \Delta \setminus \{(S,I): S = \frac{1}{\R_0}  \}$ (an open, dense subset of $\Delta$) are attracted to the DFE when $\R_0 \leq 1$. $\mathcal{B}$ is the basin of attraction of the DFE. 
 
 This result makes biological sense. If $\R_0 \leq 1$, then the expected number of secondary cases produced by a single primary case (in a completely susceptible population) is less than or equal to one. Clearly, not enough new infecteds will be created to sustain an epidemic. 
 }
@@ -292,17 +312,17 @@ $(\Shat,\Ihat)$ is a stationary point of $L(S,I)$.
 \end{align}
 Since
 \begin{equation}
-  \frac{\partial^2 L}{\partial S^2} \frac{\partial^2 L}{\partial I^2} - \frac{\partial^2 L}{\partial I \partial S} = \left (1 + \frac{\Shat}{S^2} \right )\left (1 + \frac{\Ihat}{I^2} \right ) >0
+  \frac{\partial^2 L}{\partial S^2} \biggr |_{(\Shat,\Ihat)} \frac{\partial^2 L}{\partial I^2}\biggr |_{(\Shat,\Ihat)} - \frac{\partial^2 L}{\partial I \partial S}\biggr |_{(\Shat,\Ihat)} = \left (1 + \frac{1}{\Shat} \right )\left (1 + \frac{1}{\Ihat} \right ) >0
 \end{equation}
-$(\Shat,\Ihat)$ is a minimum or maximum point and not a saddle point. Since
+$(\Shat,\Ihat)$ is a minimum or maximum point and not a saddle point. And since
 \begin{equation}
-  \frac{\partial^2 L}{\partial S^2}>0, \quad \frac{\partial^2 L}{\partial I^2}>0 
+  \frac{\partial^2 L}{\partial S^2} \biggr |_{(\Shat,\Ihat)} >0, \quad \quad \frac{\partial^2 L}{\partial I^2}\biggr |_{(\Shat,\Ihat)} >0 
 \end{equation}
 $(\Shat,\Ihat)$ is a minimum of $L(S,I)$ and thus
 \begin{equation}
-L(S,I)>L(\Shat,\Ihat) \quad \text{for all} \quad (S,I)\in\openset\setminus\{(\Shat,\Ihat)\}.
+L(S,I)>L(\Shat,\Ihat) \quad \forall  (S,I)\in\openset\setminus\{(\Shat,\Ihat)\}.
 \end{equation}
-where $\openset= \Delta \setminus \{ (S,I): S,I \neq 0 \}$.
+where $\openset= \Delta \setminus \{ (S,I) \in \Delta: S,I \neq 0 \}$ (since $L(S,I)$ is not defined on $S=0$ or $I=0$). Note that $\openset$ is an open, dense subset of $\Delta$.
 \begin{align}
   \dot{L}(S,I) &= \frac{dS}{d\tau} - \frac{\Shat}{S}\frac{dS}{d\tau} + \frac{dI}{d\tau} - \frac{\Ihat}{I}\frac{dI}{d\tau} \\
   &= \epsilon - (\R_0 I + \epsilon)S - \frac{1}{\R_0 S}(\epsilon - (\R_0 I +\epsilon)S) + (\R_0 S -1)I - \frac{\epsilon}{\R_0}(\R_0 S -1) \\
@@ -325,14 +345,7 @@ oscillations versus monotonic convergence to the equilibrium?
 {\color{blue}
 \begin{proof}
 {\color{magenta}
-The approach to the EE occurs via damped oscillations if and only if the linearized system about the EE has complex conjugate eigenvalues with negative real parts. This is because the general solution of the linearized system, with eigenvalues $\lambda_\pm$, is
-\begin{equation}
-\begin{cases}
-  S(\tau) = a_+ \exp{\lambda_+ \tau} + a_- \exp{\lambda_- \tau} \\
-  I(\tau) = b_+ \exp{\lambda_+ \tau} + b_- \exp{\lambda_- \tau}
-\end{cases}
-\end{equation}
-If $\lambda_\pm = \alpha \pm i\beta$, the solutions can be rewritten as
+The approach to the EE occurs via damped oscillations if and only if the linearized system about the EE has complex conjugate eigenvalues with negative real parts. This is because the general solution of the linearized system, with eigenvalues $\lambda_\pm = \alpha \pm i\beta$, is
 \begin{equation}
 \begin{cases}
   S(\tau) = A_+ e^{\alpha \tau}\cos{\beta \tau} + A_- e^{\alpha \tau}\sin{\beta \tau} \\
@@ -342,8 +355,8 @@ If $\lambda_\pm = \alpha \pm i\beta$, the solutions can be rewritten as
 The cosine and sine terms result in oscillations around the equilibrium. If $\alpha < 0$, the expontential terms cause decay and the oscillations are damped.
 The eigenvales of the linearized system about the EE are $\lambda_\pm = -\frac{\epsilon \R_0}{2} \pm \frac{1}{2} \sqrt{\epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1)} $. These are complex conjugate when
 \begin{align}
-0 <& \epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1) \\
-\epsilon <& \frac{4(\R_0 - 1)}{\R_0^2} \equiv \epsilon^*
+0 &< \epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1) \\
+\epsilon &< \frac{4(\R_0 - 1)}{\R_0^2} \equiv \epsilon^*
 \end{align}
 The real part, $-\frac{\epsilon \R_0}{2}$ is always negative. Thus, the approach to the EE occurs via damped oscillations.
 **ANSWER SECOND PART
@@ -369,9 +382,40 @@ The decay of the oscillations is due to the expontential term in the solution of
     \frac{2}{\epsilon \R_0}.
 \end{equation}
 }
-<<niceplot,fig.height=4>>=
-x <- seq(0,2*pi,length=100)
-plot(x,sin(x),col="red",type="l",lwd=5)
+<<Qiper,fig.height=6,dev="tikz">>=
+R0 <- seq(1.01,70,length=1000)
+esp <- seq(0.001,5,length=1000)
+espstar <- function(R0){4*(R0-1)/R0^2}
+period <- function(R0, esp) {
+  if (esp < espstar(R0)){
+    (4/pi)*sqrt(4*(R0-1)-(R0*esp)^2)
+  } else{
+    0
+  }
+}
+#periodvec <- outer(R0,esp,period)
+#persp(R0, esp, periodvec, theta = 30, phi = 30, expand = 0.5, col = "lightblue",
+#       ltheta = 120, shade = 0.75, ticktype = "detailed",
+#       xlab = "$\\R_0$", ylab = "$\\epsilon$", zlab = "Period")
+#title(main = "Period of Damped Oscillations")
+@ 
+
+<<Qief,fig.height=6,dev="tikz">>=
+R0 <- seq(1.01,70,length=1000)
+esp <- seq(0.001,5,length=1000)
+espstar <- function(R0){4*(R0-1)/R0^2}
+efold <- function(R0, esp) {
+  if (esp < espstar(R0)){
+    2/(R0*esp)
+  } else{
+    0
+  }
+}
+#efoldvec <- outer(R0,esp,efold)
+#persp(R0, esp, efoldvec, theta = 30, phi = 30, expand = 0.5, col = "lightblue",
+#       ltheta = 120, shade = 0.75, ticktype = "detailed",
+#       xlab = "$\\R_0$", ylab = "$\\epsilon$", zlab = "$e$-Folding Time")
+#title(main = "$e$-Folding Time of Damped Oscillations")
 @ 
 \end{proof}
 }
