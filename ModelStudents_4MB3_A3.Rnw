@@ -280,7 +280,36 @@ L(X)>L(X_*) \quad \text{for all} \quad X\in\openset\setminus\{X_*\} \,.
 {\color{blue}
 \begin{proof}
 {\color{magenta}
-
+\begin{align}
+  \frac{\partial L}{\partial S} &= 1 - \frac{\Shat}{S} = 0 \quad \text{when} \quad S=\Shat \\ 
+  \frac{\partial L}{\partial I} &= 1 - \frac{\Ihat}{I} = 0 \quad \text{when} \quad I=\Ihat 
+\end{align}
+$(\Shat,\Ihat)$ is a stationary point of $L(S,I)$. 
+\begin{align}
+  \frac{\partial^2 L}{\partial S^2} &= 1 + \frac{\Shat}{S^2}  \\ 
+  \frac{\partial^2 L}{\partial I^2} &= 1 + \frac{\Ihat}{I^2} \\
+  \frac{\partial^2 L}{\partial I \partial S} &= 0
+\end{align}
+Since
+\begin{equation}
+  \frac{\partial^2 L}{\partial S^2} \frac{\partial^2 L}{\partial I^2} - \frac{\partial^2 L}{\partial I \partial S} = \left (1 + \frac{\Shat}{S^2} \right )\left (1 + \frac{\Ihat}{I^2} \right ) >0
+\end{equation}
+$(\Shat,\Ihat)$ is a minimum or maximum point and not a saddle point. Since
+\begin{equation}
+  \frac{\partial^2 L}{\partial S^2}>0, \quad \frac{\partial^2 L}{\partial I^2}>0 
+\end{equation}
+$(\Shat,\Ihat)$ is a minimum of $L(S,I)$ and thus
+\begin{equation}
+L(S,I)>L(\Shat,\Ihat) \quad \text{for all} \quad (S,I)\in\openset\setminus\{(\Shat,\Ihat)\}.
+\end{equation}
+where $\openset= \Delta \setminus \{ (S,I): S,I \neq 0 \}$.
+\begin{align}
+  \dot{L}(S,I) &= \frac{dS}{d\tau} - \frac{\Shat}{S}\frac{dS}{d\tau} + \frac{dI}{d\tau} - \frac{\Ihat}{I}\frac{dI}{d\tau} \\
+  &= \epsilon - (\R_0 I + \epsilon)S - \frac{1}{\R_0 S}(\epsilon - (\R_0 I +\epsilon)S) + (\R_0 S -1)I - \frac{\epsilon}{\R_0}(\R_0 S -1) \\
+  &= -\frac{\epsilon}{\R_0}(\R_0 S -1)^2 \\
+  &<0
+\end{align}
+Thus, $L(S,I)$ is a Lyapunov function and the EE is GAS. The basin of attraction of the EE is $\openset$.
 }
 \end{proof}
 }
