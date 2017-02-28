@@ -2,6 +2,7 @@
 
 \input  4mbapreamble
 \usepackage{cases}
+\usepackage[makeroom]{cancel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FANCY HEADER AND FOOTER STUFF%%
@@ -204,37 +205,44 @@ The DFE is always biologically relevant as the proportions for susceptibles and 
 {\color{blue}
 \begin{proof}
 {\color{magenta}
-\[
-DF(\tilde{S}(\tau),\tilde{I}(\tau)) =
-\begin{pmatrix}
--(\epsilon + \R_0\tilde{I}) & -\R_0\tilde{S} \\
-\R_0\tilde{I} & (\R_0\tilde{S} - 1)
-\end{pmatrix}
-\]
+The linearization of this systems of nonlinear differential equations about the equilibrium $(S^*, I^*)$ is given by its Jacobian matrix evaluated at an equilibrium point of the system is 
+\begin{align}
+J &= \left [ \begin{matrix}
+ 	\frac{\partial}{\partial S^*} \left ( \frac{dS^*}{d\tau} \right ) & \frac{\partial}{\partial I^*}\left ( \frac{dS^*}{d\tau} \right ) \\
+	\frac{\partial}{\partial S^*}\left ( \frac{dI^*}{d\tau} \right ) & \frac{\partial}{\partial I^*}\left ( \frac{dI^*}{d\tau} \right )
+\end{matrix} \right ] \\
+&= \left [ \begin{matrix}
+ 	-\R_0 I^* - \epsilon & -\R_0 S^* \\
+	\R_0 I^* & \R_0 S^* - 1
+\end{matrix} \right ] 
+\end{align}
 
-For the DFE, DF(1,0)$\neq$0 so this system is hyperbolic and linearization can be applied.
-\[
-DF(1,0) =
-\begin{pmatrix}
--\epsilon & -\R_0 \\
-0 & (\R_0 - 1)
-\end{pmatrix}
-\]
-$\therefore$ $det(DF(1,0))=\epsilon(1-\R_0)<0$ iff $\R_0>1$.
+It's eigenvalues can be found by solving its characteristic polynomial.
+\begin{equation}
+\det(J- \lambda I)  = \lambda^2 + (1+\epsilon +\R_0 I^* - \R_0 S^*)\lambda + \epsilon - \epsilon \R_0 S^* + \R_0 I^* = 0
+\end{equation}
 
-By calculating eigenvalues, $det(\lambda-DF(1,0))=(\lambda+\epsilon)(\lambda-(\R_0-1))=0$, so $\lambda_1 = -\epsilon$ and $\lambda_2 = (\R_0-1)$. When $\lambda_1\leq\lambda_2<0$, the equilibrium is locally asymptotically stable. So, the DFE is LAS whenever $\R_0<1$. 
+The equilibrium $(S^*, I^*)$ is asymptotically stable if all of the eigenvalues of the linearized system at $(S^*, I^*)$ have negative real parts. REFERENCE GOES HERE
 
-For the EE, $DF(\Shat,\Ihat)\neq$0 so,
-\[
-DF(\frac{1}{\R_0},\epsilon(1 - \frac{1}{\R_0})) =
-\begin{pmatrix}
--\epsilon\R_0 & -1 \\
-\epsilon(\R_0 - 1) & 0
-\end{pmatrix}
-\]
-$\therefore$ $det(DF(\Shat,\Ihat))=\epsilon(\R_0-1)<0$ iff $\R_0<1$.
+For the DFE $(S^*, I^*)=(1,0)$ and the characteristic polynomial is
+\begin{align}
+ 0 &= \lambda^2 + (1 - \R_0)\lambda + \epsilon(1 - \R_0) \\
+ &= (\lambda + 1 - \R_0)(\lambda + \epsilon)
+\end{align}
+so the eigenvalues are $-\epsilon, \R_0 - 1$. These are both negative, and therefore the DFE is asymptotically stable, if $\R_0 <1 $.
 
-By calculating eigenvalues, det($\lambda$-DF($\hat{S}$,$\hat{I}$))=$\lambda(\lambda+\epsilon\R_0)+\epsilon(\R_0-1)=0$ so $\lambda$ = $\pm\sqrt{\epsilon[\frac{\epsilon\R_0^2}{4}-\R_0+1]} - \frac{\epsilon\R_0}{2}$.
+For the EE $(S^*, I^*)=\left (\frac{1}{\R_0}, \frac{\epsilon}{\R_0}(\R_0 - 1) \right )$ and the characteristic polynomial is
+\begin{equation}
+	0 = \lambda^2 + \epsilon \R_0 \lambda + \epsilon(\R_0 -1) 
+\end{equation}
+which has solutions $\lambda_\pm = -\frac{\epsilon \R_0}{2} \pm \frac{1}{2} \sqrt{\epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1)} $. The eigenvalues are negative if
+\begin{align}
+	0 >& -\epsilon \R_0 + \sqrt{\epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1)}  \\
+	\cancel{\epsilon^2 \R_0^2} >& \cancel{\epsilon^2\R_0^2} - 4\epsilon(\R_0 - 1) \\
+	\R_0 > 1
+\end{align}
+Thus, the EE is asymptotically stable if $\R_0 > 1 $.
+
 }
 \end{proof}
 }
@@ -244,7 +252,17 @@ By calculating eigenvalues, det($\lambda$-DF($\hat{S}$,$\hat{I}$))=$\lambda(\lam
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+Consider the function $L:\Delta \rightarrow \R$ defined as $L(S,I)=I$. Let $\mathcal{C}=\{(S,I) \in \Delta : I=0, S \ne \frac{1}{\R_0} \}$.
+\begin{align}
+  L(S,I) &= I=0 \quad \forall (S,I) \in \mathcal{C} \\
+  L(S,I) &= I>0 \quad \forall (S,I) \in \Delta \setminus \mathcal{C} \\
+  \dot{L}(S,I) &= \underbrace{(\R_0 S - 1)}_{<0 \ if \ \R_0 \leq 1}\underbrace{I}_{>0} <0 \quad \forall (S,I) \in \Delta \setminus \mathcal{C}
+\end{align}
+Thus, L is a strict Lyapunov function and $\mathcal{C}$ is globally asymptotically stable if $\R_0 \leq 1$. All initial states in $\mathcal{B} \equiv \Delta \setminus \{(S,I): S = \frac{1}{\R_0}  \}$ (an open) are attracted to the DFE when $\R_0 \leq 1$. $\mathcal{B}$ is the basin of attraction of the DFE. It is an open, dense suset of $\Delta$. 
+
+This result makes biological sense. If $\R_0 \leq 1$, then the expected number of secondary cases produced by a single primary case (in a completely susceptible population) is less than or equal to one. Clearly, not enough new infecteds will be created to sustain an epidemic. 
+}
 \end{proof}
 }
 
@@ -277,7 +295,30 @@ oscillations versus monotonic convergence to the equilibrium?
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+The approach to the EE occurs via damped oscillations if and only if the linearized system about the EE has complex conjugate eigenvalues with negative real parts. This is because the general solution of the linearized system, with eigenvalues $\lambda_\pm$, is
+\begin{equation}
+\begin{cases}
+  S(\tau) = a_+ \exp{\lambda_+ \tau} + a_- \exp{\lambda_- \tau} \\
+  I(\tau) = b_+ \exp{\lambda_+ \tau} + b_- \exp{\lambda_- \tau}
+\end{cases}
+\end{equation}
+If $\lambda_\pm = \alpha \pm i\beta$, the solutions can be rewritten as
+\begin{equation}
+\begin{cases}
+  S(\tau) = A_+ e^{\alpha \tau}\cos{\beta \tau} + A_- e^{\alpha \tau}\sin{\beta \tau} \\
+  I(\tau) = B_+ e^{\alpha \tau}\cos{\beta \tau} + B_- e^{\alpha \tau}\sin{\beta \tau}
+\end{cases}
+\end{equation}
+The cosine and sine terms result in oscillations around the equilibrium. If $\alpha < 0$, the expontential terms cause decay and the oscillations are damped.
+The eigenvales of the linearized system about the EE are $\lambda_\pm = -\frac{\epsilon \R_0}{2} \pm \frac{1}{2} \sqrt{\epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1)} $. These are complex conjugate when
+\begin{align}
+0 <& \epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1) \\
+\epsilon <& \frac{4(\R_0 - 1)}{\R_0^2} \equiv \epsilon^*
+\end{align}
+The real part, $-\frac{\epsilon \R_0}{2}$ is always negative. Thus, the approach to the EE occurs via damped oscillations.
+**ANSWER SECOND PART
+}
 \end{proof}
 }
 
@@ -289,7 +330,16 @@ oscillations versus monotonic convergence to the equilibrium?
 
 {\color{blue}
 \begin{proof}[Solution]
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots\ And here's a sample inclusion of a graph in this \texttt{knitr} script\dots\ not the right graph, but hey, this is just a template\dots}
+{\color{magenta}
+The oscillations are due to the cosine and sine terms in the solution of the linearized system about the EE. Thus, the period of oscillations is given by the period of the trigonometric terms, $\frac{2\pi}{\beta}$. For the EE it is
+\begin{equation}
+    \frac{4\pi}{ \sqrt{4\epsilon(\R_0 - 1) - \epsilon^2\R_0^2 }} .
+\end{equation}
+The decay of the oscillations is due to the expontential term in the solution of the linearized system about the EE. The $e$-folding time of the decay is $\frac{-1}{\alpha}$. For the EE it is
+\begin{equation}
+    \frac{2}{\epsilon \R_0}.
+\end{equation}
+}
 <<niceplot,fig.height=4>>=
 x <- seq(0,2*pi,length=100)
 plot(x,sin(x),col="red",type="l",lwd=5)
