@@ -438,7 +438,62 @@ efold <- function(R0, esp) {
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta}
+If we set $R_0 = 0$, 
+
+\begin{subnumcases}{F(\tilde(S),\tilde(I)) = \label{E:EE}}
+\frac{d\tilde{S}}{d\tau} &= $\epsilon(\tilde{N} - \tilde{S}) = 0$ \label{E:EE a} \\
+\tilde{S} &= $\tilde{N} = 1$ \nonumber \\
+\noalign{\vspace{8pt}} \nonumber \\
+\frac{d\tilde{I}}{d\tau} &= $- \tilde{I} = 0$ \label{E:EE b} \\
+\end{subnumcases}
+
+As a result, in this case there exists only a single fixed point when $R_0$ and based on the matrix derived in question e, we know that it is asymptotically stable.
+
+When $ 0 < R_0 < 1$,
+Use the results from the questions above 
+
+When $R_0 = 1$,
+derive it 
+
+When $R_0 > 1$
+Use the results from the questions above
+
+library(deSolve)
+
+SIR.vector.field <- function (t, vars, pars = c(eps,R_0)) {
+  with(as.list(c(vars, pars)), {
+    dI = R_0*S*I/N - I
+    dS = eps - R_0*S*I - eps*S
+    vec.fld <- c(dI=dI, dS=dS)
+    return(list(c(vec.fld)))
+  })
+}
+
+draw.soln <- function(ic=c(x=1,y=0),tmax=1,
+                      times=seq(0,tmax,by=tmax/500),
+                      func,parms,...) {
+  soln <- ode(ic,times,func,parms)
+  lines(times,soln[,"y"],lwd=2,...)
+}
+
+## Plot Solutions of the SIR Model
+## draw box for plot
+plot(0,0,xlim=c(0,1),ylim=c(0,1),type="n",xlab="Susceptibility (S)",
+     ylab="Prevalence (I)",las=1)
+
+## draw solutions for several values of parameter R_0
+vals <- c(0,1/2, 1,8)
+line <- c(1:length(vals))
+for (i in 1:length(vals)) {
+  draw.soln(x=S,y=I,
+            func=SIR.vector.field,parms=c(eps = (8/9), R_0=vals[i]),
+            lty=line[i], ## use a different line style for each solution
+            col=line[i]) ## use a different line colour for each solution
+}
+## draw legend for different values of R_0
+legend("topright",legend=vals,lty=line,col=line,title="\\R_0 Values")
+}
 \end{proof}
 }
 
@@ -449,7 +504,7 @@ efold <- function(R0, esp) {
 
 {\color{blue}
 \begin{proof}
-{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
+{\color{magenta} The SIR model cannot explain recurrent epidemics, which is a inherent quality of epidemics }
 \end{proof}
 }
 
