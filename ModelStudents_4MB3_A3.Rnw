@@ -383,8 +383,8 @@ The decay of the oscillations is due to the expontential term in the solution of
 \end{equation}
 }
 <<period,fig.height=6,dev="tikz">>=
-R0 <- seq(1,20,length=100)
-eps <- seq(0.00001,0.999,length=100)
+R0 <- seq(1,20,length=60)
+eps <- seq(0.00001,0.999,length=60)
 
 #Defining functions thats calculates the period
 period <- function(eps, R0) {
@@ -404,7 +404,7 @@ persp(eps, R0, periodmatrix, theta = 30, phi = 30, expand = 0.5,
 
 #Showing epsilon^*
 epsstar <- 4*(R0-1)/R0^2 
-lines (trans3d(epsstar, R0, rep(0,100), pmat = res), col = 4)
+lines (trans3d(epsstar, R0, rep(0,60), pmat = res), col = 4)
 mtext("$\\epsilon^*(\\R_0)$", side=4, line=-8, padj=17, las=2, col=4)
 
 title(main = "Period of Damped Oscillations") 
@@ -412,8 +412,8 @@ title(main = "Period of Damped Oscillations")
 @ 
 
 <<efolding,fig.height=6,dev="tikz">>=
-R0 <- seq(1,20,length=100)
-eps <- seq(0.0001,0.999,length=100)
+R0 <- seq(1,20,length=60)
+eps <- seq(0.0001,0.999,length=60)
 
 #Defining functions thats calculates the e-folding time
 efold <- function(R0, eps) {
@@ -433,7 +433,7 @@ persp(eps, R0, efoldmatrix, theta = 30, phi = 30, expand = 0.5,
 
 #Showing epsilon^*
 epsstar <- 4*(R0-1)/R0^2 
-lines (trans3d(epsstar, R0, rep(0,100), pmat = res), col = 4)
+lines (trans3d(epsstar, R0, rep(0,60), pmat = res), col = 4)
 mtext("$\\epsilon^*(\\R_0)$", side=4, line=-8, padj=17, las=2, col=4)
 
 title(main = "e-Folding Time of Damped Oscillations") 
@@ -479,7 +479,7 @@ derive it
 
 When $R_0 > 1$
 Use the results from the questions above
-
+<<bifur,fig.height=6,dev="tikz">>=
 library(deSolve)
 
 SIR.vector.field <- function (t, vars, pars = c(eps,R_0)) {
@@ -513,7 +513,9 @@ for (i in 1:length(vals)) {
             col=line[i]) ## use a different line colour for each solution
 }
 ## draw legend for different values of R_0
-legend("topright",legend=vals,lty=line,col=line,title="\\R_0 Values")
+legend("topright",legend=vals,lty=line,col=line,title="$\\R_0$ Values")
+@
+
 }
 \end{proof}
 }
