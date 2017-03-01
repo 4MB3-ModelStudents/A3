@@ -355,7 +355,7 @@ The approach to the EE occurs via damped oscillations if and only if the lineari
 The cosine and sine terms result in oscillations around the equilibrium. If $\alpha < 0$, the expontential terms cause decay and the oscillations are damped.
 The eigenvales of the linearized system about the EE are $\lambda_\pm = -\frac{\epsilon \R_0}{2} \pm \frac{1}{2} \sqrt{\epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1)} $. These are complex conjugate when
 \begin{align}
-0 &< \epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1) \\
+0 &> \epsilon^2\R_0^2 - 4\epsilon(\R_0 - 1) \\
 \epsilon &< \frac{4(\R_0 - 1)}{\R_0^2} \equiv \epsilon^*
 \end{align}
 The real part, $-\frac{\epsilon \R_0}{2}$ is always negative. Thus, the approach to the EE occurs via damped oscillations.
@@ -382,40 +382,61 @@ The decay of the oscillations is due to the expontential term in the solution of
     \frac{2}{\epsilon \R_0}.
 \end{equation}
 }
-<<Qiper,fig.height=6,dev="tikz">>=
-R0 <- seq(1.01,70,length=1000)
-esp <- seq(0.001,5,length=1000)
-espstar <- function(R0){4*(R0-1)/R0^2}
-period <- function(R0, esp) {
-  if (esp < espstar(R0)){
-    (4/pi)*sqrt(4*(R0-1)-(R0*esp)^2)
-  } else{
-    0
-  }
+<<period,fig.height=6,dev="tikz">>=
+R0 <- seq(1,20,length=100)
+eps <- seq(0.00001,0.999,length=100)
+
+#Defining functions thats calculates the period
+period <- function(eps, R0) {
+  (4*pi)/sqrt(4*(R0-1)-(R0*eps)^2)
 }
-#periodvec <- outer(R0,esp,period)
-#persp(R0, esp, periodvec, theta = 30, phi = 30, expand = 0.5, col = "lightblue",
-#       ltheta = 120, shade = 0.75, ticktype = "detailed",
-#       xlab = "$\\R_0$", ylab = "$\\epsilon$", zlab = "Period")
-#title(main = "Period of Damped Oscillations")
+#Matrix of period values for all combinations of values of R0, epsilon
+periodmatrix <- outer(eps,R0,period)
+#Setting NaNs and complex numbers to 0
+periodmatrix[is.na(periodmatrix)] <- 0
+periodmatrix[is.complex(periodmatrix)] <- 0
+
+#3D plot of period vs R0 and epsilon
+persp(eps, R0, periodmatrix, theta = 30, phi = 30, expand = 0.5, 
+      col = "lightblue",ltheta = 120, shade = 0.75, 
+      ticktype = "detailed", xlab = "$\\epsilon $", 
+      ylab = "$\\R_0$", zlab = "Period") -> res
+
+#Showing epsilon^*
+epsstar <- 4*(R0-1)/R0^2 
+lines (trans3d(epsstar, R0, rep(0,100), pmat = res), col = 4)
+mtext("$\\epsilon^*(\\R_0)$", side=4, line=-8, padj=17, las=2, col=4)
+
+title(main = "Period of Damped Oscillations") 
+
 @ 
 
-<<Qief,fig.height=6,dev="tikz">>=
-R0 <- seq(1.01,70,length=1000)
-esp <- seq(0.001,5,length=1000)
-espstar <- function(R0){4*(R0-1)/R0^2}
-efold <- function(R0, esp) {
-  if (esp < espstar(R0)){
-    2/(R0*esp)
-  } else{
-    0
-  }
+<<efolding,fig.height=6,dev="tikz">>=
+R0 <- seq(1,20,length=100)
+eps <- seq(0.0001,0.999,length=100)
+
+#Defining functions thats calculates the e-folding time
+efold <- function(R0, eps) {
+    2/(R0*eps)
 }
-#efoldvec <- outer(R0,esp,efold)
-#persp(R0, esp, efoldvec, theta = 30, phi = 30, expand = 0.5, col = "lightblue",
-#       ltheta = 120, shade = 0.75, ticktype = "detailed",
-#       xlab = "$\\R_0$", ylab = "$\\epsilon$", zlab = "$e$-Folding Time")
-#title(main = "$e$-Folding Time of Damped Oscillations")
+#Matrix of e-fold values for all combinations of values of R0, epsilon
+efoldmatrix <- outer(eps,R0,efold)
+#Setting NaNs and complex numbers to 0
+efoldmatrix[is.na(efoldmatrix)] <- 0
+efoldmatrix[is.complex(efoldmatrix)] <- 0
+
+#3D plot of e-folding time vs R0 and epsilon
+persp(eps, R0, efoldmatrix, theta = 30, phi = 30, expand = 0.5, 
+      col = "lightblue",ltheta = 120, shade = 0.75, 
+      ticktype = "detailed", xlab = "$\\epsilon $", 
+      ylab = "$\\R_0$", zlab = "e-Folding Time") -> res
+
+#Showing epsilon^*
+epsstar <- 4*(R0-1)/R0^2 
+lines (trans3d(epsstar, R0, rep(0,100), pmat = res), col = 4)
+mtext("$\\epsilon^*(\\R_0)$", side=4, line=-8, padj=17, las=2, col=4)
+
+title(main = "e-Folding Time of Damped Oscillations") 
 @ 
 \end{proof}
 }
