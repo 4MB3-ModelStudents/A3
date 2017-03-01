@@ -22,6 +22,14 @@
 
 \begin{document}
 
+<<global_options,include=FALSE>>=
+opts_chunk$set(external=FALSE)
+@
+d
+<<pre_load,include=FALSE>>=
+options(tikzDefaultEngine='pdftex')
+@
+
 \begin{center}
 {\bf Mathematics 4MB3/6MB3 Mathematical Biology\\
 \smallskip
@@ -378,7 +386,7 @@ The oscillations are due to the cosine and sine terms in the solution of the lin
     \frac{4\pi}{ \sqrt{4\epsilon(\R_0 - 1) - \epsilon^2\R_0^2 }} .
 \end{equation}
 The decay of the oscillations is due to the expontential term in the solution of the linearized system about the EE. The $e$-folding time of the decay is $\frac{-1}{\alpha}$. For the EE it is
-\begin{equation}
+\begin{equation} \label{e-folding}
     \frac{2}{\epsilon \R_0}.
 \end{equation}
 }
@@ -408,7 +416,6 @@ lines (trans3d(epsstar, R0, rep(0,60), pmat = res), col = 4)
 mtext("$\\epsilon^*(\\R_0)$", side=4, line=-6, padj=17, las=2, col=4)
 
 title(main = "Period of Damped Oscillations") 
-
 @ 
 
 <<efolding,fig.height=6,dev="tikz">>=
@@ -479,7 +486,7 @@ derive it
 
 When $R_0 > 1$
 Use the results from the questions above
-<<bifur,fig.height=6,dev="tikz">>=
+<<bifur,fig.height=6,dev="tikz",external=FALSE>>=
 library(deSolve)
 
 SIR.vector.field <- function (t, vars, pars = c(eps,R_0)) {
@@ -500,15 +507,16 @@ draw.soln <- function(ic=c(x=1,y=0),tmax=1,
 
 ## Plot Solutions of the SIR Model
 ## draw box for plot
-plot(0,0,xlim=c(0,1),ylim=c(0,1),type="n",xlab="Susceptibility (S)",
-     ylab="Prevalence (I)",las=1)
+plot(0,0,xlim=c(0,1),ylim=c(0,1),type="n",
+     xlab="Susceptibility (S)",ylab="Prevalence (I)",
+     las=1)
 
 ## draw solutions for several values of parameter R_0
 vals <- c(0,1/2, 1,8)
 line <- c(1:length(vals))
 for (i in 1:length(vals)) {
-  draw.soln(x=S,y=I,
-            func=SIR.vector.field,parms=c(eps = (8/9), R_0=vals[i]),
+  draw.soln(x=S,y=I,func=SIR.vector.field,
+            parms=c(eps = (8/9), R_0=vals[i]),
             lty=line[i], ## use a different line style for each solution
             col=line[i]) ## use a different line colour for each solution
 }
@@ -520,14 +528,12 @@ legend("topright",legend=vals,lty=line,col=line,title="$\\R_0$ Values")
 \end{proof}
 }
 
-\item Are there real diseases that display recurrent epidemics for which
-  the standard SIR model that you have studied in this problem might be
-  adequate to explain the observed epidemic dynamics?  If so, which
-  diseases?  If not, why not?
+\item Are there real diseases that display recurrent epidemics for which the standard SIR model that you have studied in this problem might be adequate to explain the observed epidemic dynamics?  If so, which diseases?  If not, why not?
 
 {\color{blue}
 \begin{proof}
-{\color{magenta} The SIR model cannot explain recurrent epidemics, which is a inherent quality of epidemics }
+{\color{magenta} The SIR model cannot explain recurrence, which is a inherent quality of epidemics, so it cannot accurately model real diseases as observed. As shown in part (i), the period of oscillations for the SIR model are damped and show an eventual exponential decline to the EE for increasing $\R_0$ and $\epsilon$ values with sharp peaks of varied amplitude along the curve of points of $\epsilon^(\R_0)$. However, the $e$-folding time of each peak has a rate of decay given by \eqref{e-folding}, and, as shown in the figure, smoothly decays to the EE for all values of $\R_0$ and $\epsilon$.
+}
 \end{proof}
 }
 
